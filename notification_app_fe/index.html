@@ -19,56 +19,186 @@
       --accent: #f5a623;
       --log-bg: #0d0e13;
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace; min-height: 100vh; }
-    header { border-bottom: 1px solid var(--border); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; background: var(--surface); }
-    header h1 { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 800; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      min-height: 100vh;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 20px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--surface);
+    }
+
+    header h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+
     header h1 span { color: var(--accent); }
-    .controls { display: flex; align-items: center; gap: 12px; }
-    .controls label { font-size: 0.75rem; color: var(--muted); }
-    .controls select { background: var(--surface2); color: var(--text); border: 1px solid var(--border); padding: 6px 10px; border-radius: 6px; font-family: 'DM Mono', monospace; font-size: 0.8rem; }
-    .btn { background: var(--accent); color: #000; border: none; padding: 7px 16px; border-radius: 6px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.78rem; cursor: pointer; }
-    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
-    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--muted); font-size: 0.75rem; }
-    main { display: grid; grid-template-columns: 1fr 340px; height: calc(100vh - 65px); }
-    .inbox-panel { padding: 24px 28px; overflow-y: auto; border-right: 1px solid var(--border); }
-    .inbox-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-    .inbox-header h2 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; }
-    .badge-count { background: var(--surface2); color: var(--muted); font-size: 0.7rem; padding: 3px 8px; border-radius: 20px; border: 1px solid var(--border); }
-    .legend { display: flex; gap: 16px; margin-bottom: 20px; }
-    .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.7rem; color: var(--muted); }
-    .dot { width: 8px; height: 8px; border-radius: 50%; }
-    .notif-list { display: flex; flex-direction: column; gap: 10px; }
-    .notif-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; display: flex; gap: 14px; animation: slideIn 0.3s ease both; }
-    @keyframes slideIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-    .notif-card.placement { border-left: 3px solid var(--placement); }
-    .notif-card.result { border-left: 3px solid var(--result); }
-    .notif-card.event { border-left: 3px solid var(--event); }
-    .rank-num { font-family: 'Syne', sans-serif; font-size: 0.65rem; font-weight: 800; color: var(--muted); min-width: 22px; }
-    .notif-body { flex: 1; }
-    .notif-top { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
-    .type-badge { font-size: 0.62rem; font-weight: 600; font-family: 'Syne', sans-serif; padding: 2px 7px; border-radius: 4px; text-transform: uppercase; }
-    .type-badge.placement { background: rgba(245,166,35,0.15); color: var(--placement); }
-    .type-badge.result { background: rgba(79,195,247,0.15); color: var(--result); }
-    .type-badge.event { background: rgba(129,199,132,0.15); color: var(--event); }
-    .score-pill { font-size: 0.6rem; color: var(--muted); border: 1px solid var(--border); padding: 2px 6px; border-radius: 4px; }
-    .notif-message { font-size: 0.82rem; line-height: 1.4; margin-bottom: 6px; }
-    .notif-time { font-size: 0.68rem; color: var(--muted); }
-    .state-msg { text-align: center; padding: 60px 20px; color: var(--muted); font-size: 0.85rem; }
-    .spinner { width: 32px; height: 32px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .log-section { display: flex; flex-direction: column; background: var(--log-bg); }
-    .log-header { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-    .log-header h3 { font-family: 'Syne', sans-serif; font-size: 0.8rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
-    #log-panel { flex: 1; overflow-y: auto; padding: 10px 12px; font-size: 0.68rem; line-height: 1.7; }
-    .log-entry { padding: 1px 0; }
-    .log-time { color: #3a3d4a; }
-    .log-level { font-weight: 600; margin: 0 4px; }
-    .log-entry.log-info .log-level { color: #4fc3f7; }
-    .log-entry.log-warn .log-level { color: #f5a623; }
-    .log-entry.log-error .log-level { color: #ef5350; }
-    .log-entry.log-debug .log-level { color: #ab47bc; }
-    .log-msg { color: #8a8f9e; }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .controls select,
+    .controls button {
+      padding: 7px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text);
+      font-family: inherit;
+    }
+
+    .btn {
+      background: var(--accent);
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn:disabled { opacity: 0.5; }
+
+    main {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      height: calc(100vh - 70px);
+    }
+
+    .inbox-panel {
+      padding: 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+    }
+
+    .inbox-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .notif-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .notif-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      display: flex;
+      gap: 14px;
+    }
+
+    .notif-card.placement { border-left: 4px solid var(--placement); }
+    .notif-card.result { border-left: 4px solid var(--result); }
+    .notif-card.event { border-left: 4px solid var(--event); }
+
+    .rank-num {
+      color: var(--muted);
+      font-weight: bold;
+      min-width: 24px;
+    }
+
+    .notif-message {
+      font-size: 0.82rem;
+      margin: 6px 0;
+    }
+
+    .notif-time {
+      color: var(--muted);
+      font-size: 0.68rem;
+    }
+
+    .type-badge {
+      font-size: 0.62rem;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    .type-badge.placement {
+      background: rgba(245,166,35,0.15);
+      color: var(--placement);
+    }
+
+    .type-badge.result {
+      background: rgba(79,195,247,0.15);
+      color: var(--result);
+    }
+
+    .type-badge.event {
+      background: rgba(129,199,132,0.15);
+      color: var(--event);
+    }
+
+    .score-pill {
+      font-size: 0.6rem;
+      color: var(--muted);
+      margin-left: 8px;
+    }
+
+    .state-msg {
+      text-align: center;
+      padding: 60px;
+      color: var(--muted);
+    }
+
+    .spinner {
+      width: 30px;
+      height: 30px;
+      border: 3px solid var(--border);
+      border-top: 3px solid var(--accent);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin: 0 auto 15px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .log-section {
+      background: var(--log-bg);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .log-header {
+      padding: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    #log-panel {
+      padding: 12px;
+      overflow-y: auto;
+      flex: 1;
+      font-size: 0.68rem;
+    }
+
+    .log-entry {
+      margin-bottom: 6px;
+    }
+
+    .log-info { color: #4fc3f7; }
+    .log-warn { color: #f5a623; }
+    .log-error { color: #ef5350; }
+    .log-debug { color: #ab47bc; }
   </style>
 </head>
 <body>
@@ -76,14 +206,13 @@
 <header>
   <h1>Campus <span>Priority</span> Inbox</h1>
   <div class="controls">
-    <label>Show top</label>
     <select id="topN">
-      <option value="10" selected>10</option>
+      <option value="10">10</option>
       <option value="15">15</option>
       <option value="20">20</option>
     </select>
-    <button class="btn" id="fetchBtn" onclick="fetchAndRender()">⟳ Fetch</button>
-    <button class="btn btn-outline" onclick="Logger.clearLogs()">Clear Logs</button>
+    <button class="btn" id="fetchBtn" onclick="fetchAndRender()">Fetch</button>
+    <button onclick="Logger.clearLogs()">Clear Logs</button>
   </div>
 </header>
 
@@ -91,17 +220,13 @@
   <div class="inbox-panel">
     <div class="inbox-header">
       <h2>Unread Notifications</h2>
-      <span class="badge-count" id="countBadge">0 shown</span>
-    </div>
-    <div class="legend">
-      <div class="legend-item"><div class="dot" style="background:var(--placement)"></div>Placement (weight 3)</div>
-      <div class="legend-item"><div class="dot" style="background:var(--result)"></div>Result (weight 2)</div>
-      <div class="legend-item"><div class="dot" style="background:var(--event)"></div>Event (weight 1)</div>
+      <span id="countBadge">0 shown</span>
     </div>
     <div class="notif-list" id="notifList">
-      <div class="state-msg">Click <strong>Fetch</strong> to load notifications.</div>
+      <div class="state-msg">Click Fetch to load notifications.</div>
     </div>
   </div>
+
   <div class="log-section">
     <div class="log-header">
       <h3>Middleware Logs</h3>
@@ -111,132 +236,118 @@
 </main>
 
 <script>
-// ============================================================
-// Logging Middleware - Posts to Affordmed log server
-// ============================================================
-const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYXBDbGFpbXMiOnsiYXVkIjoiaHR0cDovLzIwLjI0NC41Ni4xNDQvZXZhbHVhdGlvbi1zZXJ2aWNlIiwiZW1haWwiOiJycjQwOTlAc3JtaXN0LmVkdS5pbiIsImV4cCI6MTc3NzcwMjU3MiwiaWF0IjoxNzc3NzAxNjcyLCJpc3MiOiJBZmZvcmQgTWVkaWNhbCBUZWNobm9sb2dpZXMgUHJpdmF0ZSBMaW1pdGVkIiwianRpIjoiYjUyYmU1YjgtMzcxZC00YmQzLThmMTktZjE5ZDNlNzYyY2ZhIiwibG9jYWxlIjoiZW4tSU4iLCJuYW1lIjoicmljaGEiLCJzdWIiOiIyN2NjYjg4OS01NTYxLTQ3ZjMtYWQyOS01Yzc0Njk4MDI5OWEifSwiZW1haWwiOiJycjQwOTlAc3JtaXN0LmVkdS5pbiIsIm5hbWUiOiJyaWNoYSIsInJvbGxObyI6InJhMjMxMTA0MzAxMDA0NyIsImFjY2Vzc0NvZGUiOiJRa2JweEgiLCJjbGllbnRJRCI6IjI3Y2NiODg5LTU1NjEtNDdmMy1hZDI5LTVjNzQ2OTgwMjk5YSIsImNsaWVudFNlY3JldCI6ImtYRnpRS1J2ZXRqZFJ4Um0ifQ.bxJtqRHpOETPgS74MaVhQJLrd5gDjMNmIUgmql1p_0A";
-const LOG_API = "http://20.207.122.201/evaluation-service/logs";
-const NOTIF_API = "http://20.207.122.201/evaluation-service/notifications";
+const AUTH_TOKEN = "PASTE_YOUR_LATEST_ACCESS_TOKEN_HERE";
 
-const logStore = [];
+const BASE_URL = "http://20.244.56.144/evaluation-service";
+const LOG_API = `${BASE_URL}/logs`;
+const NOTIF_API = `${BASE_URL}/notifications`;
 
-function getTimestamp() { return new Date().toISOString(); }
+const TYPE_WEIGHT = {
+  Placement: 3,
+  Result: 2,
+  Event: 1
+};
 
-function renderLog(level, message) {
-  const panel = document.getElementById("log-panel");
-  if (panel) {
-    const div = document.createElement("div");
-    div.className = `log-entry log-${level.toLowerCase()}`;
-    div.innerHTML = `<span class="log-time">${getTimestamp()}</span><span class="log-level">[${level.toUpperCase()}]</span><span class="log-msg">${message}</span>`;
-    panel.appendChild(div);
-    panel.scrollTop = panel.scrollHeight;
-  }
+function timestamp() {
+  return new Date().toISOString();
 }
 
-async function postLog(level, pkg, message) {
-  const entry = { timestamp: getTimestamp(), level, package: pkg, message };
-  logStore.push(entry);
+function renderLog(level, msg) {
+  const panel = document.getElementById("log-panel");
+  const div = document.createElement("div");
+  div.className = `log-entry log-${level}`;
+  div.innerHTML = `[${timestamp()}] [${level.toUpperCase()}] ${msg}`;
+  panel.appendChild(div);
+  panel.scrollTop = panel.scrollHeight;
+}
+
+async function sendLog(level, pkg, message) {
   renderLog(level, `[${pkg}] ${message}`);
+
   try {
     await fetch(LOG_API, {
       method: "POST",
       headers: {
+        "Authorization": `Bearer ${AUTH_TOKEN}`,
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${AUTH_TOKEN}`
+        "Accept": "application/json"
       },
       body: JSON.stringify({
         stack: "frontend",
-        level: level,
+        level,
         package: pkg,
-        message: message
+        message
       })
     });
-  } catch (e) {
-    renderLog("warn", `[middleware] Log post failed: ${e.message}`);
+  } catch (err) {
+    renderLog("warn", `Log failed: ${err.message}`);
   }
 }
 
 const Logger = {
-  info:  (pkg, msg) => postLog("info",  pkg, msg),
-  warn:  (pkg, msg) => postLog("warn",  pkg, msg),
-  error: (pkg, msg) => postLog("error", pkg, msg),
-  debug: (pkg, msg) => postLog("debug", pkg, msg),
+  info: (pkg, msg) => sendLog("info", pkg, msg),
+  warn: (pkg, msg) => sendLog("warn", pkg, msg),
+  error: (pkg, msg) => sendLog("error", pkg, msg),
+  debug: (pkg, msg) => sendLog("debug", pkg, msg),
   clearLogs: () => {
-    logStore.length = 0;
-    const p = document.getElementById("log-panel");
-    if (p) p.innerHTML = "";
+    document.getElementById("log-panel").innerHTML = "";
   }
 };
-</script>
-
-<script>
-// ============================================================
-// Priority Logic + App
-// ============================================================
-const TYPE_WEIGHT = { Placement: 3, Result: 2, Event: 1 };
 
 function computeScore(notification) {
   const typeWeight = TYPE_WEIGHT[notification.Type] || 0;
   const hoursAgo = (Date.now() - new Date(notification.Timestamp).getTime()) / 3600000;
   const recencyBonus = hoursAgo <= 24 ? 1 : 0;
-  const score = typeWeight + recencyBonus;
-  Logger.debug("component", `Score: ${notification.ID} type=${notification.Type} score=${score}`);
-  return score;
-}
-
-class MaxHeap {
-  constructor() { this.heap = []; }
-  insert(item) {
-    this.heap.push(item);
-    this.heap.sort((a, b) => b.score !== a.score ? b.score - a.score : new Date(b.Timestamp) - new Date(a.Timestamp));
-  }
-  topN(n) { return this.heap.slice(0, n); }
+  return typeWeight + recencyBonus;
 }
 
 async function fetchAndRender() {
   const btn = document.getElementById("fetchBtn");
   const list = document.getElementById("notifList");
-  const N = parseInt(document.getElementById("topN").value);
+  const topN = parseInt(document.getElementById("topN").value);
 
   btn.disabled = true;
   list.innerHTML = `<div class="state-msg"><div class="spinner"></div>Fetching...</div>`;
 
-  await Logger.info("api", `Fetching top ${N} notifications`);
+  await Logger.info("api", `Fetching top ${topN} notifications`);
 
   try {
     const response = await fetch(NOTIF_API, {
       method: "GET",
       headers: {
         "Authorization": `Bearer ${AUTH_TOKEN}`,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Accept": "application/json"
       }
     });
 
     if (!response.ok) {
-      await Logger.error("api", `HTTP error: ${response.status}`);
-      list.innerHTML = `<div class="state-msg">API error: ${response.status}</div>`;
-      btn.disabled = false;
-      return;
+      throw new Error(`HTTP ${response.status}`);
     }
 
     const data = await response.json();
     const notifications = data.notifications || [];
-    await Logger.info("api", `Received ${notifications.length} notifications`);
 
-    const heap = new MaxHeap();
-    for (const notif of notifications) {
-      notif.score = computeScore(notif);
-      heap.insert(notif);
-    }
+    notifications.forEach(n => {
+      n.score = computeScore(n);
+    });
 
-    const topNotifs = heap.topN(N);
-    await Logger.info("component", `Rendering top ${topNotifs.length} notifications`);
-    renderNotifications(topNotifs);
-    document.getElementById("countBadge").textContent = `${topNotifs.length} shown`;
+    notifications.sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      return new Date(b.Timestamp) - new Date(a.Timestamp);
+    });
+
+    const topNotifications = notifications.slice(0, topN);
+
+    renderNotifications(topNotifications);
+
+    document.getElementById("countBadge").textContent = `${topNotifications.length} shown`;
+
+    await Logger.info("component", `Rendered ${topNotifications.length} notifications`);
 
   } catch (err) {
-    await Logger.error("api", `Fetch failed: ${err.message}`);
     list.innerHTML = `<div class="state-msg">Error: ${err.message}</div>`;
+    await Logger.error("api", err.message);
   }
 
   btn.disabled = false;
@@ -245,28 +356,37 @@ async function fetchAndRender() {
 function renderNotifications(notifications) {
   const list = document.getElementById("notifList");
   list.innerHTML = "";
+
+  if (!notifications.length) {
+    list.innerHTML = `<div class="state-msg">No notifications found.</div>`;
+    return;
+  }
+
   notifications.forEach((notif, i) => {
-    const type = notif.Type?.toLowerCase() || "event";
+    const type = (notif.Type || "Event").toLowerCase();
+
     const card = document.createElement("div");
     card.className = `notif-card ${type}`;
-    card.style.animationDelay = `${i * 40}ms`;
+
     card.innerHTML = `
       <div class="rank-num">#${i + 1}</div>
-      <div class="notif-body">
-        <div class="notif-top">
+      <div>
+        <div>
           <span class="type-badge ${type}">${notif.Type}</span>
           <span class="score-pill">score: ${notif.score}</span>
         </div>
         <div class="notif-message">${notif.Message}</div>
         <div class="notif-time">${new Date(notif.Timestamp).toLocaleString()}</div>
-      </div>`;
+      </div>
+    `;
+
     list.appendChild(card);
   });
 }
 
 window.addEventListener("DOMContentLoaded", async () => {
   await Logger.info("page", "Campus Priority Inbox initialized");
-  await Logger.info("middleware", "Custom logging middleware active");
+  await Logger.info("middleware", "Logging middleware active");
 });
 </script>
 
